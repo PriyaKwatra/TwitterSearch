@@ -21,28 +21,26 @@ import java.util.ArrayList;
 public class RecyclerClass extends RecyclerView.Adapter<RecyclerClass.ViewHolder> {
     Context c;
     OuterClass outer;
-    ArrayList <InnerInfo> arrayList;
-            public  RecyclerClass(OuterClass outer,Context c)
-             {this.c=c;
-                 this.outer=outer;
-                 arrayList=new ArrayList<>();
-                 for(int i=0;i<outer.getStatuses().size();i++)
-                 {
-                     arrayList.add(outer.getStatuses().get(i));
+    ArrayList<InnerInfo> arrayList;
+
+    public RecyclerClass(OuterClass outer, Context c) {
+        this.c = c;
+        this.outer = outer;
+        arrayList = new ArrayList<>();
+        for (int i = 0; i < outer.getStatuses().size(); i++) {
+            arrayList.add(outer.getStatuses().get(i));
 
 
-                 }
+        }
 
 
-
-
-             }
+    }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        LayoutInflater inflater=LayoutInflater.from(c);
-        View v=inflater.inflate(R.layout.recyclerlayout,parent,false);
-        ViewHolder vh=new ViewHolder(v);
+        LayoutInflater inflater = LayoutInflater.from(c);
+        View v = inflater.inflate(R.layout.recyclerlayout, parent, false);
+        ViewHolder vh = new ViewHolder(v);
         return vh;
 
 
@@ -50,7 +48,7 @@ public class RecyclerClass extends RecyclerView.Adapter<RecyclerClass.ViewHolder
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        MoreInner inner=arrayList.get(position).getUser();
+        MoreInner inner = arrayList.get(position).getUser();
         holder.name.setText(inner.getName());
         Picasso.with(c).load(inner.getProfile_image_url_https()).into(holder.profile);
         holder.status.setText(arrayList.get(position).getText());
@@ -61,8 +59,6 @@ public class RecyclerClass extends RecyclerView.Adapter<RecyclerClass.ViewHolder
         holder.likes.setText(arrayList.get(position).getFavourites_count());
 
 
-
-
     }
 
     @Override
@@ -70,8 +66,8 @@ public class RecyclerClass extends RecyclerView.Adapter<RecyclerClass.ViewHolder
         return arrayList.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder{
-       ImageView profile;
+    class ViewHolder extends RecyclerView.ViewHolder {
+        ImageView profile;
         TextView name;
         TextView status;
         TextView link;
@@ -81,13 +77,12 @@ public class RecyclerClass extends RecyclerView.Adapter<RecyclerClass.ViewHolder
         public ViewHolder(View itemView) {
             super(itemView);
 
-            profile=(ImageView)itemView.findViewById(R.id.profile);
-            name=(TextView) itemView.findViewById(R.id.name);
-            status=(TextView)itemView.findViewById(R.id.tweet);
-            link=(TextView)itemView.findViewById(R.id.link);
-            likes=(TextView)itemView.findViewById(R.id.likes);
-            retweets=(TextView)itemView.findViewById(R.id.retweet);
-
+            profile = (ImageView) itemView.findViewById(R.id.profile);
+            name = (TextView) itemView.findViewById(R.id.name);
+            status = (TextView) itemView.findViewById(R.id.tweet);
+            link = (TextView) itemView.findViewById(R.id.link);
+            likes = (TextView) itemView.findViewById(R.id.likes);
+            retweets = (TextView) itemView.findViewById(R.id.retweet);
 
 
         }

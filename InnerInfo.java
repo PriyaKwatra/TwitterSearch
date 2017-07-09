@@ -11,7 +11,7 @@ public class InnerInfo {
     MoreInner user;
 
     String retweet_count;
-      String      favourites_count;
+    String favourites_count;
 
     public InnerInfo(String text, String link, MoreInner user, String retweet_count, String favourites_count) {
         this.text = text;

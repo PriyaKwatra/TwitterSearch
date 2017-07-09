@@ -7,7 +7,7 @@ package com.example.acer.twittersearch;
 public class MoreInner {
 
 
-   String profile_image_url_https;
+    String profile_image_url_https;
     String name;
 
     public MoreInner(String profile_image_url_https, String name) {

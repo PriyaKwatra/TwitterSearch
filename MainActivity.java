@@ -32,38 +32,34 @@ public class MainActivity extends AppCompatActivity {
     protected void onSaveInstanceState(Bundle outState) {
 
         super.onSaveInstanceState(outState);
-        outState.putParcelable("key",outer);
+        outState.putParcelable("key", outer);
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        search=(EditText)findViewById(R.id.edit1);
-        recyclerView=(RecyclerView) findViewById(R.id.recycler);
-        floatingActionButton=(FloatingActionButton)findViewById(R.id.button1);
-         client =new OkHttpClient();
-        c=this;
-        RecyclerView.LayoutManager manager=new LinearLayoutManager(getBaseContext());
+        search = (EditText) findViewById(R.id.edit1);
+        recyclerView = (RecyclerView) findViewById(R.id.recycler);
+        floatingActionButton = (FloatingActionButton) findViewById(R.id.button1);
+        client = new OkHttpClient();
+        c = this;
+        RecyclerView.LayoutManager manager = new LinearLayoutManager(getBaseContext());
         recyclerView.setLayoutManager(manager);
-        if(savedInstanceState!=null)
-        {
+        if (savedInstanceState != null) {
 
-            outer=savedInstanceState.getParcelable("key");
-            recyclerView.setAdapter(new RecyclerClass(outer,c));
+            outer = savedInstanceState.getParcelable("key");
+            recyclerView.setAdapter(new RecyclerClass(outer, c));
 
         }
-
-
-
 
 
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                   String s=search.getText().toString();
+                String s = search.getText().toString();
 
-                Request request=new Request.Builder().url("https://loklak.org/api/search.json?q="+s).build();
+                Request request = new Request.Builder().url("https://loklak.org/api/search.json?q=" + s).build();
                 client.newCall(request).enqueue(new Callback() {
                     @Override
                     public void onFailure(Call call, IOException e) {
@@ -72,34 +68,28 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     public void onResponse(Call call, Response response) throws IOException {
-                      String result=response.body().string();
-                        Gson gson=new Gson();
+                        String result = response.body().string();
+                        Gson gson = new Gson();
 
-                       outer=gson.fromJson(result,OuterClass.class);
+                        outer = gson.fromJson(result, OuterClass.class);
 
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                recyclerView.setAdapter(new RecyclerClass(outer,c));
+                                recyclerView.setAdapter(new RecyclerClass(outer, c));
                             }
                         });
-
-
 
 
                     }
                 });
 
 
-
             }
         });
 
 
-
-
     }
-
 
 
 }
